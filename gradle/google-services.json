@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "3304564491",
+    "project_id": "sabor-conecta",
+    "storage_bucket": "sabor-conecta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3304564491:android:395d7f0f9f3e3e772e240e",
+        "android_client_info": {
+          "package_name": "com.example.saborconecta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6jCJTfFyDqyW_6N3ci953BSPstGFZyc8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

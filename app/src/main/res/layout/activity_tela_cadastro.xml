@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow_backgground"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/seta_voltar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Cadastro"
+        android:textSize="24sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"/>
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nome"
+        android:background="@drawable/borda_edit_text"
+        android:layout_below="@id/textViewTitle"
+        android:layout_marginTop="16dp"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:layout_below="@id/editTextName"
+        android:background="@drawable/borda_edit_text"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:layout_below="@id/editTextEmail"
+        android:background="@drawable/borda_edit_text"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirme sua Senha"
+        android:inputType="textPassword"
+        android:background="@drawable/borda_edit_text"
+        android:layout_below="@id/editTextPassword"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Telefone"
+        android:inputType="phone"
+        android:background="@drawable/borda_edit_text"
+        android:layout_below="@id/editTextConfirmPassword"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"/>
+
+    <EditText
+        android:id="@+id/editTextDOB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/borda_edit_text"
+        android:hint="Data de Nascimento (DD/MM/AAAA)"
+        android:inputType="date"
+        android:layout_below="@id/editTextPhone"
+        android:layout_marginTop="16dp"
+        android:padding="10dp"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/editTextDOB"
+        android:layout_marginTop="16dp"
+        android:gravity="center_horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButtonConsumer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Consumidor"/>
+
+        <RadioButton
+            android:id="@+id/radioButtonProducer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agrofamiliar"
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        android:layout_below="@id/linearLayoutOptions"
+        android:layout_marginTop="24dp"/>
+
+</RelativeLayout>
