@@ -3,10 +3,6 @@
         android:id="@+id/menu_home"
         android:title="Home"
         android:icon="@drawable/ic_home"/>
-    <item
-        android:id="@+id/menu_search"
-        android:title="Buscar"
-        android:icon="@drawable/ic_search"/>
 
     <item
         android:id="@+id/adicionarPedido"

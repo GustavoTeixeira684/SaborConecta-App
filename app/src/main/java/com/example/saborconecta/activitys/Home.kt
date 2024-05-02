@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.saborconecta.MainActivity
 import com.example.saborconecta.R
+import com.example.saborconecta.activitys_menu.AdicionarProduto
 import com.example.saborconecta.activitys_menu.config_perfil
 import com.example.saborconecta.adapter.MenuAdapter
 import com.example.saborconecta.databinding.ActivityHomeBinding
@@ -32,6 +33,11 @@ class Home : AppCompatActivity() {
             when (item.itemId) {
                 R.id.menu_home -> {
                     Troca_de_Tela(MainActivity::class.java)
+                    return@setOnNavigationItemSelectedListener true
+                }
+
+                R.id.adicionarPedido -> {
+                    Troca_de_Tela(AdicionarProduto::class.java)
                     return@setOnNavigationItemSelectedListener true
                 }
 
