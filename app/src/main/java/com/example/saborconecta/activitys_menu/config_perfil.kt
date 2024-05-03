@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.saborconecta.MainActivity
 import com.example.saborconecta.R
+import com.example.saborconecta.activitys.Home
 import com.example.saborconecta.databinding.ActivityConfigPerfilBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,6 +21,10 @@ class config_perfil : AppCompatActivity() {
         setContentView(binding.root)
 
         LeituraDados(binding)
+
+        binding.imageViewBack.setOnClickListener {
+            Troca_de_Tela(Home::class.java)
+        }
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {

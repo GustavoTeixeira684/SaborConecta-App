@@ -27,8 +27,6 @@ class MeusPedidos : AppCompatActivity() {
 
         lerProdutos()
 
-        MenuPedidos("1", "2", "3", "4")
-
         val adapter = MenuPedidosAdapter(menuPedidos, this)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -55,27 +53,31 @@ class MeusPedidos : AppCompatActivity() {
     }
 
     private fun lerProdutos() {
+        val usuarioAtual = auth.currentUser?.uid.toString()
         val produtosRef = BD.collection("Produtos_Cadastro")
 
-        produtosRef.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val documento = document.id
-                    val idAgrofamiliar = document.getString("ID Agrofamiliar") ?: ""
-                    val nomeProduto = document.getString("Nome") ?: ""
-                    val preco = document.getString("Preco") ?: ""
-                    val tipoAlimento = document.getString("Tipo_de_Alimento") ?: ""
+        val infoUsuariosRef = BD.collection("InfoUsuarios")
+        infoUsuariosRef.document(usuarioAtual).get()
+            .addOnSuccessListener { usuarioSnapshot ->
+                val nomeUsuario = "Nome: " + usuarioSnapshot.getString("Nome") ?: ""
 
-                    val novoPedido = MenuPedidos(documento, idAgrofamiliar, nomeProduto, preco)
-                    menuPedidos.add(novoPedido) // Adicionar o novo pedido à lista
-                }
+                produtosRef.get()
+                    .addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            val idAgrofamiliar = document.getString("ID Agrofamiliar") ?: ""
+                            if (usuarioAtual == idAgrofamiliar) {
+                                val documento = document.id
+                                val nomeProduto = "Nome do Produto: " + document.getString("Nome") ?: ""
+                                val preco = "Preço: R$" + document.getString("Preco") ?: ""
 
-                // Notificar o adapter sobre as mudanças nos dados
-                binding.recyclerView.adapter?.notifyDataSetChanged()
+                                val novoPedido = MenuPedidos(documento, nomeUsuario, nomeProduto, preco)
+                                menuPedidos.add(novoPedido)
+                            }
+                        }
+                        binding.recyclerView.adapter?.notifyDataSetChanged()
+                    }
             }
     }
-
-
 
     private fun Troca_de_Tela(next_tela: Class<*>) {
         val intent = Intent(this, next_tela)
