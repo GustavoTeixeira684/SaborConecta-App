@@ -42,6 +42,9 @@ class TelaCadastro : AppCompatActivity() {
             Consumidor_ou_AgroFamiliar = "Agrofamiliar"
         }
 
+        binding.imageViewBack.setOnClickListener {
+            Troca_de_Tela(MainActivity::class.java)
+        }
 
         binding.buttonSignUp.setOnClickListener {
             val nome = binding.editTextName.text.toString()

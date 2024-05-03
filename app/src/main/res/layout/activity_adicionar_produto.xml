@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/yellow_backgground">
 
-    <!-- Header -->
     <ImageView
         android:id="@+id/imageViewBack"
         android:layout_width="50dp"

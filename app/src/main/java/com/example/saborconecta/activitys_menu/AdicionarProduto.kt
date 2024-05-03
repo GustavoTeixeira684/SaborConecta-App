@@ -1,7 +1,11 @@
 package com.example.saborconecta.activitys_menu
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.saborconecta.MainActivity
+import com.example.saborconecta.R
+import com.example.saborconecta.activitys.Home
 import com.example.saborconecta.databinding.ActivityAdicionarProdutoBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,6 +20,10 @@ class AdicionarProduto : AppCompatActivity() {
         setContentView(binding.root)
 
         var Tipo_de_Alimento: String = ""
+
+        binding.imageViewBack.setOnClickListener {
+            Troca_de_Tela(Home::class.java)
+        }
 
         binding.radioButtonVerdurasVegetais.setOnClickListener {
             binding.radioButtonVerdurasVegetais.isChecked = true
@@ -50,34 +58,48 @@ class AdicionarProduto : AppCompatActivity() {
         }
 
         binding.buttonAddProduct.setOnClickListener {
-           val Nome_Produto =  binding.editTextProductName.text.toString()
-           val Preco = binding.editTextPrice.text.toString()
+            val Nome_Produto = binding.editTextProductName.text.toString()
+            val Preco = binding.editTextPrice.text.toString()
 
-           SalvarProduto(Nome_Produto, Preco, Tipo_de_Alimento)
+            SalvarProduto(Nome_Produto, Preco, Tipo_de_Alimento)
         }
 
-    }
 
-    private fun SalvarProduto(Nome_Produto: String, Preco: String, Tipo_de_Alimento: String) {
-        val usuarioatual = auth.currentUser?.uid.toString()
-
-        BD.collection("InfoUsuarios").document(usuarioatual)
-            .addSnapshotListener { documento, error ->
-                if (documento != null) {
-                    val dadousuario = hashMapOf(
-                        "ID Usuário" to usuarioatual,
-                        "AgroFamiliar" to documento.getString("Nome"),
-                        "Nome do Produto" to Nome_Produto,
-                        "Preco" to "R$"+Preco,
-                    )
-                    val colecao = BD.collection("Produtos_Cadastro").document(Tipo_de_Alimento).collection("Pedido")
-                    colecao.get().addOnSuccessListener { documentos ->
-                        val tamanhoColecao = documentos.size()
-                        BD.collection("Produtos_Cadastro").document(Tipo_de_Alimento).collection("Pedido - $tamanhoColecao").document("Pedido - $tamanhoColecao").set(dadousuario)
-                    }.addOnFailureListener { exception ->
-
-                    }
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.adicionarPedido -> {
+                    Troca_de_Tela(AdicionarProduto::class.java)
+                    return@setOnNavigationItemSelectedListener true
+                }
+                R.id.Meus_Produtos -> {
+                    Troca_de_Tela(MeusPedidos::class.java)
+                    return@setOnNavigationItemSelectedListener true
                 }
             }
+            false // Caso nenhum dos itens corresponda
+        }
+    }
+
+    private fun SalvarProduto(Nome_Produto: String, Preco: String, Tipo_de_Alimento: String){
+        val usuarioatual = auth.currentUser?.uid.toString()
+        val dadousuario = hashMapOf(
+            "ID Agrofamiliar" to usuarioatual,
+            "Nome" to Nome_Produto,
+            "Preco" to Preco,
+            "Tipo_de_Alimento" to Tipo_de_Alimento,
+        )
+
+        BD.collection("Produtos_Cadastro").get().addOnSuccessListener { documents ->
+            val quantidadeDocumentos = documents.size() + 1
+            BD.collection("Produtos_Cadastro").document("Pedido - $quantidadeDocumentos")
+                .set(dadousuario)
+        }
+    }
+
+
+    private fun Troca_de_Tela(next_tela: Class<*>) {
+        val intent = Intent(this, next_tela)
+        startActivity(intent)
+        finish()
     }
 }

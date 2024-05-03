@@ -2,11 +2,11 @@
 
     <item
         android:id="@+id/adicionarPedido"
-        android:title="Alimentos"
-        android:icon="@drawable/ic_pedidos"/>
+        android:title="Adicionar Produtos"
+        android:icon="@drawable/ic_maispedidos"/>
 
     <item
-        android:id="@+id/menu_orders"
-        android:title="Pedidos"
+        android:id="@+id/Meus_Produtos"
+        android:title="Meus Produtos"
         android:icon="@drawable/ic_cesta"/>
 </menu>
