@@ -32,7 +32,7 @@ class Home : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_home -> {
-                    Troca_de_Tela(MainActivity::class.java)
+                    Troca_de_Tela(Home::class.java)
                     return@setOnNavigationItemSelectedListener true
                 }
 

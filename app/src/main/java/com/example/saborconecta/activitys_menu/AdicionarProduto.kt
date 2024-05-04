@@ -3,6 +3,7 @@ package com.example.saborconecta.activitys_menu
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.saborconecta.MainActivity
 import com.example.saborconecta.R
 import com.example.saborconecta.activitys.Home
@@ -80,20 +81,28 @@ class AdicionarProduto : AppCompatActivity() {
         }
     }
 
-    private fun SalvarProduto(Nome_Produto: String, Preco: String, Tipo_de_Alimento: String){
+    private fun SalvarProduto(Nome_Produto: String, Preco: String, Tipo_de_Alimento: String) {
         val usuarioatual = auth.currentUser?.uid.toString()
-        val dadousuario = hashMapOf(
-            "ID Agrofamiliar" to usuarioatual,
-            "Nome" to Nome_Produto,
-            "Preco" to Preco,
-            "Tipo_de_Alimento" to Tipo_de_Alimento,
-        )
 
-        BD.collection("Produtos_Cadastro").get().addOnSuccessListener { documents ->
-            val quantidadeDocumentos = documents.size() + 1
-            BD.collection("Produtos_Cadastro").document("Pedido - $quantidadeDocumentos")
-                .set(dadousuario)
-        }
+        val infoUsuariosRef = BD.collection("InfoUsuarios")
+        infoUsuariosRef.document(usuarioatual).get()
+            .addOnSuccessListener { usuarioSnapshot ->
+                val nomeUsuario = usuarioSnapshot.getString("Nome") ?: ""
+
+                val dadousuario = hashMapOf(
+                    "ID Agrofamiliar" to usuarioatual,
+                    "Nome do Agrofamiliar" to nomeUsuario,
+                    "Nome do Produto" to Nome_Produto,
+                    "Preco" to Preco,
+                    "Tipo_de_Alimento" to Tipo_de_Alimento,
+                )
+
+                BD.collection("Produtos_Cadastro").get().addOnSuccessListener { documents ->
+                    val quantidadeDocumentos = documents.size() + 1
+                    BD.collection("Produtos_Cadastro").document("Produto - $quantidadeDocumentos")
+                        .set(dadousuario)
+                }
+            }
     }
 
 

@@ -2,6 +2,7 @@ package com.example.saborconecta.activitys
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +22,6 @@ class TelaCadastro : AppCompatActivity() {
     private lateinit var binding: ActivityTelaCadastroBinding
     private val auth = FirebaseAuth.getInstance()
     private val BD = FirebaseFirestore.getInstance()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +46,13 @@ class TelaCadastro : AppCompatActivity() {
             Troca_de_Tela(MainActivity::class.java)
         }
 
+        binding.ButtonLinkTermoUso.setOnClickListener {
+            val url = "https://saborconecta.blogspot.com/2024/05/politica-de-privacidade-e-termos-de-uso.html"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
         binding.buttonSignUp.setOnClickListener {
             val nome = binding.editTextName.text.toString()
             val email = binding.editTextEmail.text.toString()
@@ -57,7 +64,6 @@ class TelaCadastro : AppCompatActivity() {
             novo_cadastro(it, nome, email, senha, confirme_senha, telefone, dataNas, Consumidor_ou_AgroFamiliar)
         }
     }
-
     private fun novo_cadastro(
         view: View,
         nome: String,
@@ -97,7 +103,6 @@ class TelaCadastro : AppCompatActivity() {
             }
         }
     }
-
     private fun authEmail(
         nome: String,
         email: String,

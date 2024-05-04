@@ -67,7 +67,7 @@ class MeusPedidos : AppCompatActivity() {
                             val idAgrofamiliar = document.getString("ID Agrofamiliar") ?: ""
                             if (usuarioAtual == idAgrofamiliar) {
                                 val documento = document.id
-                                val nomeProduto = "Nome do Produto: " + document.getString("Nome") ?: ""
+                                val nomeProduto = "Nome do Produto: " + document.getString("Nome do Produto") ?: ""
                                 val preco = "Preço: R$" + document.getString("Preco") ?: ""
 
                                 val novoPedido = MenuPedidos(documento, nomeUsuario, nomeProduto, preco)
