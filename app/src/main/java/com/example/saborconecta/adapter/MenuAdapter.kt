@@ -9,6 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.saborconecta.R
+import com.example.saborconecta.activitys.TelaCadastro
+import com.example.saborconecta.activitys_menu.PedidosAtivos
 import com.example.saborconecta.model.menu_home
 
 class MenuAdapter(private val context: Context, private val menuList: List<menu_home>) :
@@ -24,10 +26,19 @@ class MenuAdapter(private val context: Context, private val menuList: List<menu_
                 val position = adapterPosition
                 when (position) {
                     0 -> {
+                        Troca_de_Tela(PedidosAtivos::class.java, "Verduras e Vegetais")
                     }
+
                     1 -> {
+                        Troca_de_Tela(PedidosAtivos::class.java, "Frutas Frescas")
                     }
+
                     2 -> {
+                        Troca_de_Tela(PedidosAtivos::class.java, "Legumes e Grãos")
+                    }
+
+                    3 -> {
+                        Troca_de_Tela(PedidosAtivos::class.java, "Ervas e Temperos")
                     }
                 }
             }
@@ -49,8 +60,9 @@ class MenuAdapter(private val context: Context, private val menuList: List<menu_
 
     override fun getItemCount() = menuList.size
 
-    private fun Troca_de_Tela(next_tela: Class<*>) {
+    private fun Troca_de_Tela(next_tela: Class<*>, data: String) {
         val intent = Intent(context, next_tela)
+        intent.putExtra("extra_data", data)
         context.startActivity(intent)
     }
 }
