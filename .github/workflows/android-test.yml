@@ -26,7 +26,7 @@ jobs:
           android-version: '30'
 
       - name: Build do projeto Android
-        run: ./gradlew assembleDebug
+        run: sudo ./gradlew assembleDebug
 
       - name: Execução dos testes unitários
-        run: ./gradlew testDebugUnitTest
+        run: sudo ./gradlew testDebugUnitTest

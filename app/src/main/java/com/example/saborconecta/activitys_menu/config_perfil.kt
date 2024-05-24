@@ -30,6 +30,11 @@ class config_perfil : AppCompatActivity() {
             Troca_de_Tela(Home::class.java)
         }
 
+        binding.buttonSairConta.setOnClickListener {
+            deslogar()
+            Troca_de_Tela(MainActivity::class.java)
+        }
+
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_home -> {
@@ -44,6 +49,10 @@ class config_perfil : AppCompatActivity() {
             false // Caso nenhum dos itens corresponda
         }
 
+    }
+
+    private fun deslogar() {
+        FirebaseAuth.getInstance().signOut()
     }
 
     private fun LeituraDados(binding: ActivityConfigPerfilBinding) {

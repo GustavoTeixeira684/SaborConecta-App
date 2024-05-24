@@ -9,7 +9,6 @@
         android:id="@+id/imageViewBack"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/seta_voltar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"

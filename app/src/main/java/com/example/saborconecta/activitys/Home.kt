@@ -49,11 +49,6 @@ class Home : AppCompatActivity() {
             false // Caso nenhum dos itens corresponda
         }
 
-        binding.imageViewBack.setOnClickListener {
-            deslogar()
-            Troca_de_Tela(MainActivity::class.java)
-        }
-
         menuList.add(menu_home("Verduras e Vegetais", "01", R.drawable.icon_base))
         menuList.add(menu_home("Frutas Frescas", "02", R.drawable.icon_base))
         menuList.add(menu_home("Legumes e Grãos", "03", R.drawable.icon_base))
@@ -63,10 +58,6 @@ class Home : AppCompatActivity() {
         val adapter = MenuAdapter(this, menuList)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
-    }
-
-    private fun deslogar() {
-        FirebaseAuth.getInstance().signOut()
     }
 
     private fun LeituraDados(binding: ActivityHomeBinding) {
