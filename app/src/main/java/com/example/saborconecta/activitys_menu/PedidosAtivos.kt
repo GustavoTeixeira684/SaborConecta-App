@@ -51,17 +51,20 @@ class PedidosAtivos : AppCompatActivity() {
     private fun lerProdutos() {
         val produtosRef = BD.collection("Produtos_Cadastro")
         val TipodeAlimento = intent.getStringExtra("extra_data")
+        val usuarioAtual = auth.currentUser?.uid.toString()
 
         produtosRef.whereEqualTo("Tipo_de_Alimento", TipodeAlimento).get()
             .addOnSuccessListener { productsSnapshot ->
                 for (productDocument in productsSnapshot) {
-                    val NomeAgroFamiliar = "Agrofamiliar: " + productDocument.getString("Nome do Agrofamiliar") ?: ""
-                    val documento = productDocument.id
-                    val nomeProduto = "Nome do Produto: " + productDocument.getString("Nome do Produto") ?: ""
-                    val preco = "Preço: R$" + productDocument.getString("Preco") ?: ""
-
-                    val novoPedido = MenuPedidos(documento, NomeAgroFamiliar, nomeProduto, preco)
-                    menuPedidos.add(novoPedido)
+                    val NomeAgroFamiliar = productDocument.getString("ID Agrofamiliar") ?: ""
+                    if (usuarioAtual != NomeAgroFamiliar) {
+                        val NomeAgroFamiliar = "Agrofamiliar: " + productDocument.getString("Nome do Agrofamiliar") ?: ""
+                        val documento = productDocument.id
+                        val nomeProduto = "Nome do Produto: " + productDocument.getString("Nome do Produto") ?: ""
+                        val preco = "Preço: R$" + productDocument.getString("Preco") ?: ""
+                        val novoPedido = MenuPedidos(documento, NomeAgroFamiliar, nomeProduto, preco)
+                        menuPedidos.add(novoPedido)
+                    }
                 }
                 binding.recyclerView.adapter?.notifyDataSetChanged()
             }

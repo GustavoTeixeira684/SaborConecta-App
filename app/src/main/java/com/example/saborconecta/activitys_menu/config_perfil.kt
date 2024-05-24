@@ -22,6 +22,10 @@ class config_perfil : AppCompatActivity() {
 
         LeituraDados(binding)
 
+        binding.buttonAlterarSenha.setOnClickListener {
+            Troca_de_Tela(AlterarSenha::class.java)
+        }
+
         binding.imageViewBack.setOnClickListener {
             Troca_de_Tela(Home::class.java)
         }
