@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private val auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,15 +40,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun login(view: View) {
+    fun login(view: View) {
         val email = binding.editTextEmail.text.toString()
         val senha = binding.editTextPassword.text.toString()
-
         when {
             email.isEmpty() || senha.isEmpty() -> {
                 Mensagens("Atenção: Preencha todos os campos", view, Color.parseColor("#118DF0"))
             }
-
             else -> {
                 auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener {
                     if (it.isSuccessful) {
@@ -57,9 +55,11 @@ class MainActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     when (it) {
                         is FirebaseAuthInvalidCredentialsException -> Mensagens(
-                            "E-mail Inválido: Digite novamente!", view, Color.parseColor("#118DF0"))
+                            "E-mail Inválido: Digite novamente!", view, Color.parseColor("#118DF0")
+                        )
                         is FirebaseNetworkException -> Mensagens(
-                            "Sem conexão com a internet!", view, Color.parseColor("#118DF0"))
+                            "Sem conexão com a internet!", view, Color.parseColor("#118DF0")
+                        )
                         else -> {
                             Mensagens("Credenciais inválidas", view, Color.parseColor("#118DF0"))
                         }

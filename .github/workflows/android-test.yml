@@ -1,0 +1,25 @@
+name: Android Test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Build do projeto Android
+        run: ./gradlew assembleDebug
+
+      - name: Execução dos testes unitários
+        run: ./gradlew testDebugUnitTest
